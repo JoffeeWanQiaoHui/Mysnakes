@@ -22,49 +22,49 @@ import javax.swing.Timer;
 
 import com.yc.utils.StartFrame; 
 public class Login{
-	//Ò»¸ö´°¿ÚµÄ¶¨Òå
+	//ä¸€ä¸ªçª—å£çš„å®šä¹‰
 private JFrame jframe;
-//ÓÃ»§ºÍÃÜÂë±êÇ©
+//ç”¨æˆ·å’Œå¯†ç æ ‡ç­¾
  private JLabel jlabel_user,jlabel_pwd;
- //Íø¸ñÊ½²¼¾Ö
+ //ç½‘æ ¼å¼å¸ƒå±€
  private GridBagLayout gridbag;
- //ÏŞÖÆ
+ //é™åˆ¶
  private GridBagConstraints constraints;
- //ÓÃ»§ÎÄ±¾¿ò
+ //ç”¨æˆ·æ–‡æœ¬æ¡†
  private JTextField jtfield_user;
- //ÃÜÂëÎÄ±¾¿ò
+ //å¯†ç æ–‡æœ¬æ¡†
  private JPasswordField jtfield_pwd;
- //µÇÈë°´Å¥
+ //ç™»å…¥æŒ‰é’®
  private JButton jbutton_login;
- //Ãæ°å
+ //é¢æ¿
  private JPanel jpanel;
- //ÓÃ»§ÊäÈë
+ //ç”¨æˆ·è¾“å…¥
  private String sb_user=new String();
- //ÃÜÂëÊäÈë
+ //å¯†ç è¾“å…¥
  private String sb_pwd=new String();
  public Login(){
   jframe = new JFrame();
-  //ÓÃ»§±êÇ©
+  //ç”¨æˆ·æ ‡ç­¾
   jlabel_user = new JLabel();
-  //ÃÜÂë±êÇ©
+  //å¯†ç æ ‡ç­¾
   jlabel_pwd = new JLabel();
-  //ÓÃ»§ÎÄ±¾¿ò
+  //ç”¨æˆ·æ–‡æœ¬æ¡†
   jtfield_user = new JTextField(4);
-  //ÃÜÂëÎÄ±¾¿ò
+  //å¯†ç æ–‡æœ¬æ¡†
   jtfield_pwd = new JPasswordField(4);
-  //²¼¾ÖµÄ³õÊ¼»¯
+  //å¸ƒå±€çš„åˆå§‹åŒ–
   gridbag = new GridBagLayout();
-  //Ìí¼ÓµÇÈë°´Å¥
+  //æ·»åŠ ç™»å…¥æŒ‰é’®
   jbutton_login = new JButton();  
-  //³õÊ¼»¯²¢ÏÔÊ¾½çÃæ
+  //åˆå§‹åŒ–å¹¶æ˜¾ç¤ºç•Œé¢
   init();
-  //µÇÈë°´Å¥¼àÌıÆ÷
+  //ç™»å…¥æŒ‰é’®ç›‘å¬å™¨
    jbutton_login.addActionListener(new ActionListener() {
 	
 	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//ÓÃ»§ÎÄ±¾¿ò¼üÅÌ¼àÌı
+		//ç”¨æˆ·æ–‡æœ¬æ¡†é”®ç›˜ç›‘å¬
 		jtfield_user.addKeyListener(new KeyAdapter() {
 			 @Override
 			public void keyPressed(KeyEvent e) {
@@ -91,96 +91,96 @@ private JFrame jframe;
 				java.awt.EventQueue.invokeLater(new Runnable() {
 					
 					public void run() {
-						//ÁíÍâÈç¹ûÏëÈÃÕûÌå½çÃæ±äµÃĞ­µ÷
-						//×îºÃÉèÖÃÈİÆ÷´°ÌåµÄDefaultLookAndFeelDecoratedÊôĞÔÎªtrue
+						//å¦å¤–å¦‚æœæƒ³è®©æ•´ä½“ç•Œé¢å˜å¾—åè°ƒ
+						//æœ€å¥½è®¾ç½®å®¹å™¨çª—ä½“çš„DefaultLookAndFeelDecoratedå±æ€§ä¸ºtrue
 							JFrame.setDefaultLookAndFeelDecorated(true);
 							JDialog.setDefaultLookAndFeelDecorated(true);
 					}
 				});
-				new Timer(4000, new ActionListener() {
+				new Timer(60000, new ActionListener() {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						frame.dispose();//¹Ø±ÕµÚÒ»¸ö´°¿Ú						
+						frame.dispose();//å…³é—­ç¬¬ä¸€ä¸ªçª—å£						
 					}
 				}).start();
 			}
 		}else{
-			JOptionPane.showMessageDialog(null, "ÓÃ»§Ãû»òÕßÃÜÂë´íÎó!!!ÇëÖØĞÂÊäÈë");
+			JOptionPane.showMessageDialog(null, "ç”¨æˆ·åæˆ–è€…å¯†ç é”™è¯¯!!!è¯·é‡æ–°è¾“å…¥");
 		}
 	}
 });
  }
  /**
-  * init()³õÊ¼»¯²¢ÏÔÊ¾½çÃæ
+  * init()åˆå§‹åŒ–å¹¶æ˜¾ç¤ºç•Œé¢
   */ 
  @SuppressWarnings("serial")
 private void init(){ 
-  jframe.setTitle("Ì°³ÔÉß´ó×÷Õ½");
-  //´æÈë||µ¼ÈëÍ¼Æ¬
+  jframe.setTitle("è´ªåƒè›‡å¤§ä½œæˆ˜");
+  //å­˜å…¥||å¯¼å…¥å›¾ç‰‡
   ImageIcon icon1=new ImageIcon("./src/com/yc/images/snake.jpg");
-  //ÏÔÊ¾Í¼±ê
+  //æ˜¾ç¤ºå›¾æ ‡
   jframe.setIconImage(icon1.getImage()); 
-  //ÉèÖÃ´°¿ÚÎª²»¿É±ä,Îª¹Ì¶¨´óĞ¡
+  //è®¾ç½®çª—å£ä¸ºä¸å¯å˜,ä¸ºå›ºå®šå¤§å°
   jframe.setResizable(false);
-  //ÉèÖÃ´°¿Ú¾ÓÖĞ
+  //è®¾ç½®çª—å£å±…ä¸­
   jframe.setBounds(0, 0, 814, 634);
   jframe.setLocationRelativeTo(null);
-  //ÉèÖÃ¹Ø±Õ´°¿ÚÊ±,³ÌĞò½áÊø
+  //è®¾ç½®å…³é—­çª—å£æ—¶,ç¨‹åºç»“æŸ
   jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-  //Ìí¼ÓÃæ°å±³¾°
+  //æ·»åŠ é¢æ¿èƒŒæ™¯
   jpanel = new JPanel(){
    @Override
    protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     ImageIcon img = new ImageIcon("./src/com/yc/images/background_2.jpg");
     g.drawImage(img.getImage(), 0, 0,
-  		800,  600, null);//´Ó×ø±ê(0,0)¿ªÊ¼½øĞĞ»æÍ¼	
+  		800,  600, null);//ä»åæ ‡(0,0)å¼€å§‹è¿›è¡Œç»˜å›¾	
    }
   };
   
-  jlabel_user.setText("ÓÃ»§Ãû£º");
-  jlabel_pwd.setText("ÃÜ    Âë£º");
-  jbutton_login.setText("µÇ    Â¼");
-  //ÉèÖÃJPanelÎªÍ¸Ã÷£¬ÇÒÊ¹ÓÃGridBagLayout²¼¾Ö¹ÜÀíÆ÷
+  jlabel_user.setText("ç”¨æˆ·åï¼š");
+  jlabel_pwd.setText("å¯†    ç ï¼š");
+  jbutton_login.setText("ç™»    å½•");
+  //è®¾ç½®JPanelä¸ºé€æ˜ï¼Œä¸”ä½¿ç”¨GridBagLayoutå¸ƒå±€ç®¡ç†å™¨
   jpanel.setOpaque(true);
-  //ÉèÖÃÃæ°åµÄ²¼¾Ö·½Ê½ÎªÍø¸ñÊ½
+  //è®¾ç½®é¢æ¿çš„å¸ƒå±€æ–¹å¼ä¸ºç½‘æ ¼å¼
   jpanel.setLayout(gridbag);
-  //ÉèÖÃÃæ°åµÄ´óĞ¡
+  //è®¾ç½®é¢æ¿çš„å¤§å°
   jpanel.setSize(800, 600);
-     //ÓÃ»§ÃûÎÄ±¾¿òÏÔÊ¾
+     //ç”¨æˆ·åæ–‡æœ¬æ¡†æ˜¾ç¤º
      constraints = getGridBagConstraints(0,0,1,1,0,0,GridBagConstraints.CENTER,
         GridBagConstraints.NONE,new Insets(10,0,10,0),0,0);
      
      gridbag.setConstraints(jlabel_user, constraints);
      jpanel.add(jlabel_user);
   
-     //ÓÃ»§ÃûÊäÈë¿òÏÔÊ¾
+     //ç”¨æˆ·åè¾“å…¥æ¡†æ˜¾ç¤º
      constraints = getGridBagConstraints(1,0,1,1,0,0,GridBagConstraints.CENTER,
         GridBagConstraints.NONE,new Insets(10,0,10,0),100,0);
     
      gridbag.setConstraints(jtfield_user, constraints);
      jpanel.add(jtfield_user);
      
-     //ÃÜÂëÎÄ±¾¿òÏÔÊ¾
+     //å¯†ç æ–‡æœ¬æ¡†æ˜¾ç¤º
      constraints = getGridBagConstraints(0,1,1,1,0,0,GridBagConstraints.CENTER,
        GridBagConstraints.NONE,new Insets(10,0,10,0),0,0);
      gridbag.setConstraints(jlabel_pwd, constraints);
      jpanel.add(jlabel_pwd);
  
-     //ÃÜÂëÊäÈë¿òÏÔÊ¾
+     //å¯†ç è¾“å…¥æ¡†æ˜¾ç¤º
      constraints = getGridBagConstraints(1,1,1,1,0,0,GridBagConstraints.CENTER,
        GridBagConstraints.NONE,new Insets(10,0,10,0),100,0);
  
      gridbag.setConstraints(jtfield_pwd, constraints);
      jpanel.add(jtfield_pwd);  
-     //µÇÂ¼°´Å¥ÏÔÊ¾
+     //ç™»å½•æŒ‰é’®æ˜¾ç¤º
      constraints = getGridBagConstraints(1,2,1,1,0,0,GridBagConstraints.CENTER,
        GridBagConstraints.NONE,new Insets(10,0,10,0),0,0);
  
      gridbag.setConstraints(jbutton_login, constraints);
      jpanel.add(jbutton_login);
-     //½«Ãæ°åÌí¼Óµ½´°¿Ú
+     //å°†é¢æ¿æ·»åŠ åˆ°çª—å£
      jframe.add(jpanel);
  	}
  
