@@ -15,85 +15,85 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class StartFrame extends JFrame{
 	public StartFrame(){
-		//²»Òª±êÌâÀ¸µÄĞŞÊÎ£¬Ö÷Òª·ÀÖ¹Ò»ÏÂ´úÂëÅ×Òì³£
+		//ä¸è¦æ ‡é¢˜æ çš„ä¿®é¥°ï¼Œä¸»è¦é˜²æ­¢ä¸€ä¸‹ä»£ç æŠ›å¼‚å¸¸
 		setUndecorated(true);
-		//ÉèÖÃ´°¿Ú´óĞ¡
+		//è®¾ç½®çª—å£å¤§å°
 		this.setSize(814,634);
-		ImageIcon icon=new ImageIcon("./src/com/yc/images/snake.jpg");//´æÈë||µ¼ÈëÍ¼Æ¬
-		//ÏÔÊ¾Í¼±ê
+		ImageIcon icon=new ImageIcon("./src/com/yc/images/snake.jpg");//å­˜å…¥||å¯¼å…¥å›¾ç‰‡
+		//æ˜¾ç¤ºå›¾æ ‡
 		this.setIconImage(icon.getImage());		
-		//ÔİÊ±È¥µô
-		//¸¸´°¿Ú
+		//æš‚æ—¶å»æ‰
+		//çˆ¶çª—å£
 		//this.setFocusable(false);
-		// È·±£Ò»¸öÆ¯ÁÁµÄÍâ¹Û·ç¸ñ
+		// ç¡®ä¿ä¸€ä¸ªæ¼‚äº®çš„å¤–è§‚é£æ ¼
 		StartFrame.setDefaultLookAndFeelDecorated(true);
-		//ÉèÖÃ´°¿ÚÎª²»¿É±ä,Îª¹Ì¶¨´óĞ¡
+		//è®¾ç½®çª—å£ä¸ºä¸å¯å˜,ä¸ºå›ºå®šå¤§å°
 		this.setResizable(false);
-		//ÉèÖÃ´°¿Ú¾ÓÖĞ
+		//è®¾ç½®çª—å£å±…ä¸­
 		this.setLocationRelativeTo(null);
-		JPanel p=new JPanel();//Ãæ°å
-		JLabel JL=new JLabel();//±êÇ©
+		JPanel p=new JPanel();//é¢æ¿
+		JLabel JL=new JLabel();//æ ‡ç­¾
 		ImageIcon icon2=new ImageIcon("./src/com/yc/images/background_1.png");
 		icon2.setImage(icon2.getImage().getScaledInstance(800, 600, Image.SCALE_DEFAULT));
 		JL.setIcon(icon2);
 		p.add(JL,new Integer(Integer.MIN_VALUE));
 		getContentPane().add(p);
-		pack(); //´°¿ÚÊÊÓ¦×é¼ş´óĞ¡
-		//ÉèÖÃ¹Ø±Õ´°¿ÚÊÇ£¬Í£Ö¹ÔËĞĞÓÎÏ·
+		pack(); //çª—å£é€‚åº”ç»„ä»¶å¤§å°
+		//è®¾ç½®å…³é—­çª—å£æ˜¯ï¼Œåœæ­¢è¿è¡Œæ¸¸æˆ
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel jp=new JPanel();//Ãæ°å
-		final JButton jb1=new JButton("½øÈëÓÎÏ·");
-		//ÉèÖÃ°´Å¥×ÖÌåµÄÑÕÉ«
+		JPanel jp=new JPanel();//é¢æ¿
+		final JButton jb1=new JButton("è¿›å…¥æ¸¸æˆ");
+		//è®¾ç½®æŒ‰é’®å­—ä½“çš„é¢œè‰²
 		jb1.setForeground(Color.green);
-		//ÉèÖÃÎ»ÖÃºÍ´óĞ¡		
+		//è®¾ç½®ä½ç½®å’Œå¤§å°		
 		jb1.setBounds( 0, 0, 35, 30);
-		// ÉèÖÃ°´Å¥ÎŞ±ß¿ò
+		// è®¾ç½®æŒ‰é’®æ— è¾¹æ¡†
 		jb1.setBorderPainted(false);
-		//È¥µô½¹µã
+		//å»æ‰ç„¦ç‚¹
 		jb1.setFocusPainted(false);
-		//°´Å¥ÉèÎª²»Í¸Ã÷
+		//æŒ‰é’®è®¾ä¸ºä¸é€æ˜
 		jb1.setContentAreaFilled(true);
-		//ÉèÖÃ±³¾°ÑÕÉ«
+		//è®¾ç½®èƒŒæ™¯é¢œè‰²
 		jb1.setBackground(Color.black);
-		//ÉèÖÃ±³¾°Í¼Æ¬,²¢Í¼Æ¬×ÔÊÊÓ¦
+		//è®¾ç½®èƒŒæ™¯å›¾ç‰‡,å¹¶å›¾ç‰‡è‡ªé€‚åº”
 		ImageIcon icon3=new ImageIcon("./src/com/yc/images/start.jpg");
-		//final JButton jb1=new JButton(icon3);//("½øÈëÓÎÏ·");
+		//final JButton jb1=new JButton(icon3);//("è¿›å…¥æ¸¸æˆ");
 		//jb1.setBounds(0, 0, 30, 30);
 		icon3.getImage();
 		Image temp=icon3.getImage().getScaledInstance(jb1.getWidth(),jb1.getHeight(),Image.SCALE_DEFAULT);
 		icon3=new ImageIcon(temp);
 		jb1.setIcon(icon3);
-		 // ÉèÖÃ°´Å¥ÎŞ±ß¿ò    
+		 // è®¾ç½®æŒ‰é’®æ— è¾¹æ¡†    
 		jb1.setBorderPainted(false);
-		//ÉèÖÃ°´Å¥
-		final JButton jb2=new JButton("ÍË³öÓÎÏ·");
-		//ÉèÖÃÎ»ÖÃºÍ´óĞ¡
+		//è®¾ç½®æŒ‰é’®
+		final JButton jb2=new JButton("é€€å‡ºæ¸¸æˆ");
+		//è®¾ç½®ä½ç½®å’Œå¤§å°
 		jb2.setBounds( 0, 0, 35, 30);
-		//ÉèÖÃ°´Å¥±³¾°Í¼Æ¬
+		//è®¾ç½®æŒ‰é’®èƒŒæ™¯å›¾ç‰‡
 		ImageIcon icon4=new ImageIcon("./src/com/yc/images/exit.jpg");
 		icon4.getImage();
 		Image temp1=icon4.getImage().getScaledInstance(jb2.getWidth(),jb2.getHeight(),Image.SCALE_DEFAULT);
 		icon4=new ImageIcon(temp1);
 		jb2.setIcon(icon4);
-		// ÉèÖÃ°´Å¥ÎŞ±ß¿ò
+		// è®¾ç½®æŒ‰é’®æ— è¾¹æ¡†
 		jb2.setBorderPainted(false);
-		//ÉèÖÃ°´Å¥È¥½¹µã
+		//è®¾ç½®æŒ‰é’®å»ç„¦ç‚¹
 		jb2.setFocusPainted(false);
-		//ÉèÖÃ°´Å¥×ÖÌåµÄÑÕÉ«
+		//è®¾ç½®æŒ‰é’®å­—ä½“çš„é¢œè‰²
 		jb2.setForeground(Color.RED);
-		//ÉèÖÃ°´Å¥µÄ±³¾°ÑÕÉ«
+		//è®¾ç½®æŒ‰é’®çš„èƒŒæ™¯é¢œè‰²
 		jb2.setBackground(Color.black);
-		//ÉèÖÃ°´Å¥±³¾°²»Í¸Ã÷
+		//è®¾ç½®æŒ‰é’®èƒŒæ™¯ä¸é€æ˜
 		jb2.setContentAreaFilled(true);
 		JL.setLayout(new FlowLayout());
-		//°´Å¥Ìí¼Óµ½Ãæ°å
+		//æŒ‰é’®æ·»åŠ åˆ°é¢æ¿
 		JL.add(jb1);
         JL.add(jb2);
         
-        //ÉèÖÃ°´Å¥¼àÌıÆ÷
+        //è®¾ç½®æŒ‰é’®ç›‘å¬å™¨
         jb1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	
+            	setVisible(false);
             	new SnakeFrame();
             }
         });
@@ -102,7 +102,7 @@ public class StartFrame extends JFrame{
                 System.exit(0);
             }
         });
-        this.add(jp);//´°¿ÚÖĞÌí¼Ó¸ÃÃæ°å
+        this.add(jp);//çª—å£ä¸­æ·»åŠ è¯¥é¢æ¿
 	}
 
 }
