@@ -28,66 +28,66 @@ import javax.swing.Timer;
 
 @SuppressWarnings("serial")
 public class SnakeFrame extends JFrame{
-	//ÓÎÏ·Ãæ°åµÄ¿í¶È
+	//æ¸¸æˆé¢æ¿çš„å®½åº¦
 	private static final int WIDTH=800;
-	//³¤¶È
+	//é•¿åº¦
 	private static final int HEIGHT=600;
-	//µ¥Ôª¸ñ´óĞ¡
+	//å•å…ƒæ ¼å¤§å°
 	private static final int CELL = 20;
-	private int dir=1;//ÓÃÀ´¿ØÖÆÉßÍ·ÒÆ¶¯µÄ·½Ïò1£ºÏòÓÒ-1Ïò×ó2£ºÏòÉÏ-2£ºÏòÏÂ
-	//´æ´¢Ë®¹ûµÄÊı×é
+	private int dir=1;//ç”¨æ¥æ§åˆ¶è›‡å¤´ç§»åŠ¨çš„æ–¹å‘1ï¼šå‘å³-1å‘å·¦2ï¼šå‘ä¸Š-2ï¼šå‘ä¸‹
+	//å­˜å‚¨æ°´æœçš„æ•°ç»„
 	private String [] fruitName={"apple.png","cherry.png","grape.png",
 			"orange.png","peach.png","strawberry.png","tomato.png"};
-	//ÓÃÀ´´æ´¢ÉßÍ·ÒÔ¼°ÉßµÄÉíÌå
+	//ç”¨æ¥å­˜å‚¨è›‡å¤´ä»¥åŠè›‡çš„èº«ä½“
 	private LinkedList<JLabel> bodies=new LinkedList<JLabel>();
-	//´æ´¢¸÷ÖÖÉßÉíÌåÆ¬¶ÎµÄÊı×é
+	//å­˜å‚¨å„ç§è›‡èº«ä½“ç‰‡æ®µçš„æ•°ç»„
 	private String [] snakeBody={"body_1.png","body_2.png","body_3.png","body_4.png","body_5.png",
 			"body_6.png","body_7.png","body_8.png"};
-	private JLabel currentLabel; // ÏÔÊ¾µ±Ç°µÃ·Ö
+	private JLabel currentLabel; // æ˜¾ç¤ºå½“å‰å¾—åˆ†
 	private JLabel maxLabel;
-	private int currentScore;// µ±Ç°µÃ·Ö
-	private int maxScore;//×î¸ßµÃ·Ö
+	private int currentScore;// å½“å‰å¾—åˆ†
+	private int maxScore;//æœ€é«˜å¾—åˆ†
 	private JLabel snakeHeader;
 	private JLabel fruit;
 	@SuppressWarnings("unused")
 	private JLabel faultJLabel;
-	//Éú³ÉËæ»úÊıµÄ¹¤¾ß
+	//ç”Ÿæˆéšæœºæ•°çš„å·¥å…·
 	Random random=new Random();
-	//¶Ô½çÃæ½øĞĞ³õÊ¼»¯
+	//å¯¹ç•Œé¢è¿›è¡Œåˆå§‹åŒ–
 	public SnakeFrame(){
-		// È·±£Ò»¸öÆ¯ÁÁµÄÍâ¹Û·ç¸ñ
+		// ç¡®ä¿ä¸€ä¸ªæ¼‚äº®çš„å¤–è§‚é£æ ¼
 		SnakeFrame.setDefaultLookAndFeelDecorated(true);
-		//ÉèÖÃ±êÌâ
-		setTitle("Ì°³ÔÉß´ó×÷Õ½");
-		//ÉèÖÃÍ¼±ê
-		ImageIcon icon=new ImageIcon("./src/com/yc/images/snake.jpg");//´æÈë||µ¼ÈëÍ¼Æ¬
-		//ÏÔÊ¾Í¼±ê
+		//è®¾ç½®æ ‡é¢˜
+		setTitle("è´ªåƒè›‡å¤§ä½œæˆ˜");
+		//è®¾ç½®å›¾æ ‡
+		ImageIcon icon=new ImageIcon("./src/com/yc/images/snake.jpg");//å­˜å…¥||å¯¼å…¥å›¾ç‰‡
+		//æ˜¾ç¤ºå›¾æ ‡
 		this.setIconImage(icon.getImage());
-		//ÉèÖÃ´°¿ÚµÄ´óĞ¡
+		//è®¾ç½®çª—å£çš„å¤§å°
 		this.setSize(WIDTH+4, HEIGHT+34);
-		//ÉèÖÃ´°¿ÚÎª²»¿É±ä,Îª¹Ì¶¨´óĞ¡
+		//è®¾ç½®çª—å£ä¸ºä¸å¯å˜,ä¸ºå›ºå®šå¤§å°
 		this.setResizable(false);
-		//¼ÓÁËÕâ¸ö³ÌĞòÔËĞĞ,µ«ÊÇ»á¿¨ËÀ
-		//ÉèÎª×Ó´°¿Ú¾ÓÉÏ,ÇÒ²»ÄÜ³¬×ö¸¸´°¿Ú
+		//åŠ äº†è¿™ä¸ªç¨‹åºè¿è¡Œ,ä½†æ˜¯ä¼šå¡æ­»
+		//è®¾ä¸ºå­çª—å£å±…ä¸Š,ä¸”ä¸èƒ½è¶…åšçˆ¶çª—å£
 //		this.setAlwaysOnTop(true);		
-		//ÉèÖÃ´°¿Ú¾ÓÖĞ                                                                                                                          
+		//è®¾ç½®çª—å£å±…ä¸­                                                                                                                          
 		this.setLocationRelativeTo(null);
-		//ÉèÖÃ¹Ø±Õ´°¿ÚÊÇ£¬Í£Ö¹ÔËĞĞÓÎÏ·
+		//è®¾ç½®å…³é—­çª—å£æ˜¯ï¼Œåœæ­¢è¿è¡Œæ¸¸æˆ
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//ÉèÖÃÎª¾ø¶Ô²¼¾Ö
+		//è®¾ç½®ä¸ºç»å¯¹å¸ƒå±€
 		this.setLayout(null);
-		//½«ÓÎÏ·Ãæ°åÌí¼Óµ½´°¿ÚÖĞ
-		SnakePanel snakePanel=new SnakePanel();//´´½¨Ãæ°å
-		//¿ØÖÆÎ»ÖÃºÍ´óĞ¡
-		//Ç°ÃæÉèÖÃÎ»ÖÃ,ºóÃæÉèÖÃÃæ°åµÄ´óĞ¡,Ç°ÃæµÄ0ºÍ0´ú±í´Ó´°¿ÚµÄ×ó¶Ëµã×ø±ê£¨0,0£©¿ªÊ¼
+		//å°†æ¸¸æˆé¢æ¿æ·»åŠ åˆ°çª—å£ä¸­
+		SnakePanel snakePanel=new SnakePanel();//åˆ›å»ºé¢æ¿
+		//æ§åˆ¶ä½ç½®å’Œå¤§å°
+		//å‰é¢è®¾ç½®ä½ç½®,åé¢è®¾ç½®é¢æ¿çš„å¤§å°,å‰é¢çš„0å’Œ0ä»£è¡¨ä»çª—å£çš„å·¦ç«¯ç‚¹åæ ‡ï¼ˆ0,0ï¼‰å¼€å§‹
 		snakePanel.setBounds(0, 0, WIDTH, HEIGHT);
-		//Ìí¼Óµ½Ãæ°å
+		//æ·»åŠ åˆ°é¢æ¿
 		this.add(snakePanel);
-		//¸ø´°¿ÚÉè¶¨Ò»¸ö¼àÌıÊÂ¼ş
-		this.addKeyListener(new KeyAdapter() {//ÊÊÅäÆ÷
+		//ç»™çª—å£è®¾å®šä¸€ä¸ªç›‘å¬äº‹ä»¶
+		this.addKeyListener(new KeyAdapter() {//é€‚é…å™¨
 			@Override
 			public void keyPressed(KeyEvent e) {
-				int code=e.getKeyCode();//µÃµ½°´¼ü¶ÔÓ¦µÄÂëÖµ
+				int code=e.getKeyCode();//å¾—åˆ°æŒ‰é”®å¯¹åº”çš„ç å€¼
 				switch (code) {
 				case KeyEvent.VK_RIGHT:
 					if(dir!=snakeDirection.LEFT)
@@ -96,7 +96,7 @@ public class SnakeFrame extends JFrame{
 						break;
 					}
 				case KeyEvent.VK_LEFT:
-					//Ö»ÓĞµ±Ç°·½Ïò²»ÊÇÏòÓÒÊ±²Å¿ÉÒÔ¸Ä±äÔË¶¯·½ÏòÏò×ó
+					//åªæœ‰å½“å‰æ–¹å‘ä¸æ˜¯å‘å³æ—¶æ‰å¯ä»¥æ”¹å˜è¿åŠ¨æ–¹å‘å‘å·¦
 					if(dir!=snakeDirection.RIGHT){
 						dir=snakeDirection.LEFT;
 						break;
@@ -117,9 +117,9 @@ public class SnakeFrame extends JFrame{
 				}
 			}
 		});
-		//ÉèÖÃ´°¿ÚÎª¿É¼û
+		//è®¾ç½®çª—å£ä¸ºå¯è§
 		this.setVisible(true);
-		//ÏÈµ÷ÓÃÒ»´Î
+		//å…ˆè°ƒç”¨ä¸€æ¬¡
 		new Thread(new Runnable() {
 			
 			@Override
@@ -127,56 +127,67 @@ public class SnakeFrame extends JFrame{
 					PlayMusic.playBGM();
 			}
 		}).start();;
+		class DamonThread implements Runnable{
+			public void run() {
+				while(true){
+					PlayMusic.playBGM();
+				}
+			}
+		}
 		new Timer(60000, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PlayMusic.playBGM();
+				DamonThread dt=new DamonThread();
+				Thread t=new Thread(dt);
+				t.setDaemon(true);
+				t.start();
+				//PlayMusic.playBGM();
 			}
 		}).start();
 	}
 	/*
-	 * ²ÉÓÃÄÚ²¿ÀàµÄºÃ´¦
-	 * ¿ÉÒÔÖ±½Ó·ÃÎÊÍâ²¿ÀàµÄËùÓÃ³ÉÔ±
-	 * ÓÎÏ·Ö÷Ãæ°å(ÓÎÏ·ÇøÓò)
+	 * é‡‡ç”¨å†…éƒ¨ç±»çš„å¥½å¤„
+	 * å¯ä»¥ç›´æ¥è®¿é—®å¤–éƒ¨ç±»çš„æ‰€ç”¨æˆå‘˜
+	 * æ¸¸æˆä¸»é¢æ¿(æ¸¸æˆåŒºåŸŸ)
 	 */
 	class SnakePanel extends JPanel{
-	    private Image offScreenImage;  //Í¼ĞÎ»º´æ		
+	    private Image offScreenImage;  //å›¾å½¢ç¼“å­˜		
 		public SnakePanel(){
-			init();//¿É¼ûµÄÃæ°å
+			init();//å¯è§çš„é¢æ¿
 			this.setSize(SnakeFrame.WIDTH,SnakeFrame.HEIGHT); 
 			this.setLayout(null);
 			
 		}
 		private void init() {
 			
-			//Ìí¼Óµ±Ç°µÃ·Ö
-			currentLabel = new JLabel("µ±Ç°µÃ·Ö£º"+currentScore);
-			maxLabel=new JLabel("×î¸ßµÄ·Ö: "+maxScore);
-			//±êÇ©µÄÎ»ÖÃ¼°´óĞ¡
+			//æ·»åŠ å½“å‰å¾—åˆ†
+			currentLabel = new JLabel("å½“å‰å¾—åˆ†ï¼š"+currentScore);
+			maxLabel=new JLabel("æœ€é«˜çš„åˆ†: "+maxScore);
+			//æ ‡ç­¾çš„ä½ç½®åŠå¤§å°
 			currentLabel.setBounds(20, 20, 300, 30);
 			//maxLabel.setBounds(x, y, width, height);
 			maxLabel.setBounds(20, 50, 300, 30);
-//			ÉèÖÃ±êÇ©µÄ±³¾°ÑÕÉ«
+//			è®¾ç½®æ ‡ç­¾çš„èƒŒæ™¯é¢œè‰²
 //			currentLabel.setBackground(Color.green);
-//			ÉèÖÃÎª²»Í¸Ã÷£¬²»È»²»¿É¼û
+//			è®¾ç½®ä¸ºä¸é€æ˜ï¼Œä¸ç„¶ä¸å¯è§
 //			currentLabel.setOpaque(true);
-			//ÉèÖÃÎªÍ¸Ã÷
+			//è®¾ç½®ä¸ºé€æ˜
 			currentLabel.setOpaque(false);
 			maxLabel.setOpaque(false);
-			//Îª±êÇ©ÉèÖÃ×ÖÌå
-			Font font=new Font("ËÎÌå", Font.BOLD, 16);
+			//ä¸ºæ ‡ç­¾è®¾ç½®å­—ä½“
+			Font font=new Font("å®‹ä½“", Font.BOLD, 16);
 			currentLabel.setFont(font);
 			maxLabel.setFont(font);
-			//Îª±êÇ©ÎÄ×ÖÌí¼ÓÑÕÉ«
+			//ä¸ºæ ‡ç­¾æ–‡å­—æ·»åŠ é¢œè‰²
 			currentLabel.setForeground(Color.blue);
 			maxLabel.setForeground(Color.red);
-			//Ìí¼Óµ½Ãæ°åÖĞ
+			//æ·»åŠ åˆ°é¢æ¿ä¸­
 			this.add(currentLabel);
 			this.add(maxLabel);
-			//Ëæ»úÉú³ÉÉßÍ·
+			//éšæœºç”Ÿæˆè›‡å¤´
 			creatHeader();
-			//Ê¹ÓÃ¶àÏß³Ì,·ÀÖ¹¿¨ËÀ
+			//ä½¿ç”¨å¤šçº¿ç¨‹,é˜²æ­¢å¡æ­»
 			new Thread(new Runnable() {
 				
 				@Override
@@ -184,14 +195,14 @@ public class SnakeFrame extends JFrame{
 					creatfruit();
 				}
 			}).start();;
-			//Ê¹ÓÃ¶¨Ê±ÈÎÎñÈÃÉßÍ·ÒÆ¶¯                      
+			//ä½¿ç”¨å®šæ—¶ä»»åŠ¡è®©è›‡å¤´ç§»åŠ¨                      
 			new Timer(180, new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// ÉßÍ·ÒÆ¶¯µÄÂß¼­
-					Point oldPoint=snakeHeader.getLocation();//ÉßÍ·Ô­À´µÄÎ»ÖÃ
-					Point newPoint=null;//ÉßÍ·ÒÆ¶¯¹ıÈ¥µÄÎ»ÖÃ
+					// è›‡å¤´ç§»åŠ¨çš„é€»è¾‘
+					Point oldPoint=snakeHeader.getLocation();//è›‡å¤´åŸæ¥çš„ä½ç½®
+					Point newPoint=null;//è›‡å¤´ç§»åŠ¨è¿‡å»çš„ä½ç½®
 					switch (dir) {
 					case snakeDirection.LEFT :
 						newPoint=new Point(oldPoint.x-CELL, oldPoint.y);
@@ -212,12 +223,12 @@ public class SnakeFrame extends JFrame{
 					default:
 						break;
 					}
-					//½«ÉßÍ·ÒÆ¶¯µ½ĞÂµÄÎ»ÖÃ
+					//å°†è›‡å¤´ç§»åŠ¨åˆ°æ–°çš„ä½ç½®
 					snakeHeader.setLocation(newPoint);
-					//Ã¿´ÎÉßÍ·ÒÆ¶¯ºó
-					//ÆäËûÉíÌå½ÚµãÒ²±ØĞë¸ú×ÅÒÆ¶¯,¶¼¿ÉÄÜ³öÏÖ£º×²Ç½,»òÕß³Ôµ½Ë®¹û
+					//æ¯æ¬¡è›‡å¤´ç§»åŠ¨å
+					//å…¶ä»–èº«ä½“èŠ‚ç‚¹ä¹Ÿå¿…é¡»è·Ÿç€ç§»åŠ¨,éƒ½å¯èƒ½å‡ºç°ï¼šæ’å¢™,æˆ–è€…åƒåˆ°æ°´æœ
 					heatWall(newPoint);
-					//Èç¹ûÃ»ÓĞ×²Ç½,ÅĞ¶ÏÄÜ²»ÄÜ³Ôµ½Ë®¹û
+					//å¦‚æœæ²¡æœ‰æ’å¢™,åˆ¤æ–­èƒ½ä¸èƒ½åƒåˆ°æ°´æœ
 					if(snakeHeader.getLocation().equals(fruit.getLocation())){
 						try {
 							eatFruit();
@@ -225,39 +236,39 @@ public class SnakeFrame extends JFrame{
 							e1.printStackTrace();
 						}
 					}
-					//²»¹Ü³ÔÃ»ÓĞ³Ôµ½Ë®¹û,ÉßµÄÉíÌå²¿·Ö±ØĞë¸ú×ÅÉßÍ·ÒÆ¶¯
-					//ĞèÒª½«ÉßÍ·µÄÔ­À´Î»ÖÃ´«¹ıÈ¥
+					//ä¸ç®¡åƒæ²¡æœ‰åƒåˆ°æ°´æœ,è›‡çš„èº«ä½“éƒ¨åˆ†å¿…é¡»è·Ÿç€è›‡å¤´ç§»åŠ¨
+					//éœ€è¦å°†è›‡å¤´çš„åŸæ¥ä½ç½®ä¼ è¿‡å»
 					move(oldPoint);
 				}
 			}).start();
 			
 		}
 		/*
-		 * ÈÃÉßµÄÉíÌå¸úËæÉßÍ·µÄÒÆ¶¯·½Ïò
+		 * è®©è›‡çš„èº«ä½“è·Ÿéšè›‡å¤´çš„ç§»åŠ¨æ–¹å‘
 		 */
 		private void move(Point oldPoint){
 			Point p=new Point();
-			//´ÓÉßµÄµÚ¶ş½Ú¿ªÊ¼,Ã¿Ò»½Ú¶¼Òª¸úËæÇ°Ò»½ÚµÄÒÆ¶¯
+			//ä»è›‡çš„ç¬¬äºŒèŠ‚å¼€å§‹,æ¯ä¸€èŠ‚éƒ½è¦è·Ÿéšå‰ä¸€èŠ‚çš„ç§»åŠ¨
 			for(int i=1;i<bodies.size();i++){
-				//ÏÈ¼ÇÂ¼ÏÂÇ°Ò»½ÚÉíÌåµÄÎ»ÖÃ
+				//å…ˆè®°å½•ä¸‹å‰ä¸€èŠ‚èº«ä½“çš„ä½ç½®
 				p=bodies.get(i).getLocation();
-				//ÔÙÒÆ¶¯µ½Ç°Ò»½ÚÉíÌåµÄÎ»ÖÃ
+				//å†ç§»åŠ¨åˆ°å‰ä¸€èŠ‚èº«ä½“çš„ä½ç½®
 				bodies.get(i).setLocation(oldPoint);
-				//¸Ä±äoldPointµÄÖµÎªµ±Ç°½ÚµãµÄÔ­À´Î»ÖÃ
+				//æ”¹å˜oldPointçš„å€¼ä¸ºå½“å‰èŠ‚ç‚¹çš„åŸæ¥ä½ç½®
 				oldPoint=p;
 			}
 		}
 		/*
-		 * ³ÔË®¹ûµÄ·½·¨
+		 * åƒæ°´æœçš„æ–¹æ³•
 		 */
 		private void eatFruit() throws Exception{
-			//½«³ÔµôµÄË®¹ûËæ»ú×ª»¯ÎªÉßÉíÌåÒ»ÖÖÑÕÉ«
+			//å°†åƒæ‰çš„æ°´æœéšæœºè½¬åŒ–ä¸ºè›‡èº«ä½“ä¸€ç§é¢œè‰²
 			int index=random.nextInt(snakeBody.length);
-			//½«Ë®¹ûµÄÍ¼Æ¬×ª»¯ÉèÖÃÎª³ÉÉßÉíÌåµÄÍ¼Æ¬
+			//å°†æ°´æœçš„å›¾ç‰‡è½¬åŒ–è®¾ç½®ä¸ºæˆè›‡èº«ä½“çš„å›¾ç‰‡
 			setBackgroundImage(fruit, snakeBody[index]);
-			//½«Ë®¹ûÌí¼Óµ½ÉßµÄÉíÌå
+			//å°†æ°´æœæ·»åŠ åˆ°è›‡çš„èº«ä½“
 			bodies.add(fruit);
-			//²¥·ÅÒôÀÖ
+			//æ’­æ”¾éŸ³ä¹
 			new Thread(new Runnable() {
 				
 				@Override
@@ -265,8 +276,8 @@ public class SnakeFrame extends JFrame{
 					PlayMusic.playEatFruit();
 				}
 			}).start();
-			//Ô­À´µÄË®¹û±»³ÔµôÁË,´´½¨Ò»¸öĞÂµÄË®¹û
-			//Ê¹ÓÃ¶àÏß³Ì,·ÀÖ¹³ÌĞò¿¨ËÀ
+			//åŸæ¥çš„æ°´æœè¢«åƒæ‰äº†,åˆ›å»ºä¸€ä¸ªæ–°çš„æ°´æœ
+			//ä½¿ç”¨å¤šçº¿ç¨‹,é˜²æ­¢ç¨‹åºå¡æ­»
 //			new Thread(new Runnable() {
 //				
 //				@Override
@@ -274,11 +285,11 @@ public class SnakeFrame extends JFrame{
 //					creatfruit();
 //				}
 //			}).start();
-			//¼Ó·Ö
+			//åŠ åˆ†
 			currentScore++;
-			//ÉèÖÃµ±Ç°µÃ·Ö
-			currentLabel.setText("µ±Ç°µÃ·Ö£º"+currentScore);
-			//ÉèÖÃ×î¸ßµÄ·Ö
+			//è®¾ç½®å½“å‰å¾—åˆ†
+			currentLabel.setText("å½“å‰å¾—åˆ†ï¼š"+currentScore);
+			//è®¾ç½®æœ€é«˜çš„åˆ†
 			if(currentScore>maxScore){
 				File file=new File("D:/max.txt");
 				if(file.exists()&&file.length()==0){
@@ -291,28 +302,28 @@ public class SnakeFrame extends JFrame{
 					BufferedInputStream bis=new BufferedInputStream(fis);
 					DataInputStream dis=new DataInputStream(bis);
 					maxScore=dis.readInt();
-					maxLabel.setText("×î¸ßµÃ·Ö: "+maxScore);					
+					maxLabel.setText("æœ€é«˜å¾—åˆ†: "+maxScore);					
 				}else{
 					FileInputStream fis=new FileInputStream("d:/max.txt");
 					BufferedInputStream bis=new BufferedInputStream(fis);
 					DataInputStream dis=new DataInputStream(bis);
 					maxScore=dis.readInt();
-					maxLabel.setText("×î¸ßµÃ·Ö: "+maxScore);	
+					maxLabel.setText("æœ€é«˜å¾—åˆ†: "+maxScore);	
 				}
 			}else{
 				FileInputStream fis=new FileInputStream("d:/max.txt");
 				BufferedInputStream bis=new BufferedInputStream(fis);
 				DataInputStream dis=new DataInputStream(bis);
 				maxScore=dis.readInt();
-				maxLabel.setText("×î¸ßµÃ·Ö: "+maxScore);
+				maxLabel.setText("æœ€é«˜å¾—åˆ†: "+maxScore);
 			}
-			//ÕâÊÇlambda±í´ïÊ½
+			//è¿™æ˜¯lambdaè¡¨è¾¾å¼
 			new Thread(()->{creatfruit();}).start();			
 			
 		}
 		
 		/*
-		 * ÅĞ¶ÏÊÇ·ñ×²Ç½ÁË
+		 * åˆ¤æ–­æ˜¯å¦æ’å¢™äº†
 		 */
 		private void heatWall(Point newPoint){
 			int x= newPoint.x;
@@ -326,62 +337,62 @@ public class SnakeFrame extends JFrame{
 						PlayMusic.playGameOver();
 					}
 				}).start();
-				//ÏûÏ¢ÌáÊ¾¿ò
-				String output="ÌôÕ½Ê§°Ü\n\n¼ÌĞøÌôÕ½°É£¡£¡£¡";
+				//æ¶ˆæ¯æç¤ºæ¡†
+				String output="æŒ‘æˆ˜å¤±è´¥\n\nç»§ç»­æŒ‘æˆ˜å§ï¼ï¼ï¼";
 				JOptionPane.showMessageDialog(null, output);
 				System.exit(0);
 				
 			}
 		}
 		/*
-		 * ´´½¨ÉßÍ·²¢Ìí¼Óµ½Ãæ°åÖĞ
+		 * åˆ›å»ºè›‡å¤´å¹¶æ·»åŠ åˆ°é¢æ¿ä¸­
 		 */
 		private void creatHeader(){
-			snakeHeader=new JLabel();//ÊµÀı»¯ÉßÍ·
-			//ÉèÖÃ³ß´çÉßÍ·
+			snakeHeader=new JLabel();//å®ä¾‹åŒ–è›‡å¤´
+			//è®¾ç½®å°ºå¯¸è›‡å¤´
 			snakeHeader.setSize(CELL, CELL);
-			//ÉèÖÃÍ¼Æ¬
+			//è®¾ç½®å›¾ç‰‡
 			setBackgroundImage(snakeHeader, "header_r.png");
-			//È·¶¨ÉßÍ·µÄÎ»ÖÃ
+			//ç¡®å®šè›‡å¤´çš„ä½ç½®
 			Point p=randomPoint();
 			snakeHeader.setLocation(p);
-			//½«ÉßÍ·Ìí¼Óµ½LinkedlistÖĞ,¼´½«ÉßÍ·Ìí¼ÓÉßµÄÉíÌåÖĞ
+			//å°†è›‡å¤´æ·»åŠ åˆ°Linkedlistä¸­,å³å°†è›‡å¤´æ·»åŠ è›‡çš„èº«ä½“ä¸­
 			bodies.add(snakeHeader);
 		
-			//Ìí¼Óµ½Ãæ°å
+			//æ·»åŠ åˆ°é¢æ¿
 			this.add(snakeHeader);
 		}
 		private void creatfruit(){
 			fruit=new JLabel();
 			fruit.setSize(CELL, CELL);
-			//ÉèÖÃ±³¾°Í¼
-			//Ëæ»úÉú³ÉË®¹ûÍ¼±êµÄË÷Òı
+			//è®¾ç½®èƒŒæ™¯å›¾
+			//éšæœºç”Ÿæˆæ°´æœå›¾æ ‡çš„ç´¢å¼•
 			int index=random.nextInt(fruitName.length);
-			//ÉèÖÃÍ¼Æ¬
+			//è®¾ç½®å›¾ç‰‡
 			setBackgroundImage(fruit, fruitName[index]);
-			//ÉèÖÃËæ»úÉú³ÉÎ»ÖÃ(Ë®¹û²»ÄÜÓëË®¹ûÖØµş)
-			//Ëæ»úÉú³ÉµÄµã¿ÉÄÜ²»¿ÉÓÃ£¬Ò»Ö±µ½µãÉú³ÉµÄ¿ÉÓÃÎªÖ¹
-			//Ëæ»úÉú³ÉÒ»¸öµã,²»È·¶¨Õâ¸öµãµÄÎ»ÖÃ,ÏÈÉèÒ»¸öµã
+			//è®¾ç½®éšæœºç”Ÿæˆä½ç½®(æ°´æœä¸èƒ½ä¸æ°´æœé‡å )
+			//éšæœºç”Ÿæˆçš„ç‚¹å¯èƒ½ä¸å¯ç”¨ï¼Œä¸€ç›´åˆ°ç‚¹ç”Ÿæˆçš„å¯ç”¨ä¸ºæ­¢
+			//éšæœºç”Ÿæˆä¸€ä¸ªç‚¹,ä¸ç¡®å®šè¿™ä¸ªç‚¹çš„ä½ç½®,å…ˆè®¾ä¸€ä¸ªç‚¹
 			Point p=null;
-			//²»Öªµ½Ê²Ã´Ê±ºòÕÒµ½,ËùÒÔÓÃtrue
+			//ä¸çŸ¥åˆ°ä»€ä¹ˆæ—¶å€™æ‰¾åˆ°,æ‰€ä»¥ç”¨true
 			boolean isValid= true;
 			while(isValid){
 				p=randomPoint();
 				isValid=!isValidPoint(p);
 			}
 			fruit.setLocation(p);
-			//½«Ë®¹ûÌí¼Óµ½Ãæ°åÀï
+			//å°†æ°´æœæ·»åŠ åˆ°é¢æ¿é‡Œ
 			this.add(fruit);
 			this.repaint();
 		}
 		/*
-		 * ÅĞ¶ÏËæ»úÉú³ÉµÄË®¹ûÊÇ·ñ¿ÉÓÃ
+		 * åˆ¤æ–­éšæœºç”Ÿæˆçš„æ°´æœæ˜¯å¦å¯ç”¨
 		 */
 		private boolean isValidPoint(Point p){
-			//½«Õâ¸öµãÑ­»·ÓëÉßµÄÉíÌå½øĞĞ±È½Ï
-			boolean flag=true;//¼ÙÉèÕâ¸öµã¿ÉÓÃ
-			for(JLabel body : bodies){ //¼ÓÇ¿forÑ­»·
-				if(p.equals(body))//ËµÃ÷ÉßµÄÉíÌåÓëË®¹ûÖØºÏ
+			//å°†è¿™ä¸ªç‚¹å¾ªç¯ä¸è›‡çš„èº«ä½“è¿›è¡Œæ¯”è¾ƒ
+			boolean flag=true;//å‡è®¾è¿™ä¸ªç‚¹å¯ç”¨
+			for(JLabel body : bodies){ //åŠ å¼ºforå¾ªç¯
+				if(p.equals(body))//è¯´æ˜è›‡çš„èº«ä½“ä¸æ°´æœé‡åˆ
 				{
 					flag=false;
 					break;
@@ -390,9 +401,9 @@ public class SnakeFrame extends JFrame{
 			return flag;
 		}
 		/*
-		 * ¸øÖ¸¶¨JLabelÉèÖÃ±³¾°Í¼
-		 * @param label ÖÆ¶¨±êÇ©×é¼ş
-		 * @param fileName Í¼Æ¬ÎÄ¼şÃû³Æ
+		 * ç»™æŒ‡å®šJLabelè®¾ç½®èƒŒæ™¯å›¾
+		 * @param label åˆ¶å®šæ ‡ç­¾ç»„ä»¶
+		 * @param fileName å›¾ç‰‡æ–‡ä»¶åç§°
 		 */
 		private void setBackgroundImage(JLabel label,String fileName){
 			ImageIcon icon=new ImageIcon("./src/com/yc/images/"+fileName);
@@ -402,14 +413,14 @@ public class SnakeFrame extends JFrame{
 		}
 
 		/*                                                                                                                                        
-		 * Ëæ»úÉú³ÉÒ»¸öµã
+		 * éšæœºç”Ÿæˆä¸€ä¸ªç‚¹
 		 */
 		private Point randomPoint(){
 			int x = random.nextInt(SnakeFrame.WIDTH/20)*20;
 			int y = random.nextInt(SnakeFrame.HEIGHT/20)*20;
 			return new Point(x,y);
 		}
-		/*Éú³ÉÒ»¸ö»­±Ê£¬»æ»­³ö±³¾°Í¼Æ¬
+		/*ç”Ÿæˆä¸€ä¸ªç”»ç¬”ï¼Œç»˜ç”»å‡ºèƒŒæ™¯å›¾ç‰‡
 		 * (non-Javadoc)
 		 * @see java.awt.Container#paintComponents(java.awt.Graphics)
 		 */
@@ -418,23 +429,23 @@ public class SnakeFrame extends JFrame{
 			super.paintComponent(g);
 			ImageIcon icon=new ImageIcon("./src/com/yc/images/background.jpg");
 			g.drawImage(icon.getImage(), 0, 0,
-					SnakeFrame.WIDTH,  SnakeFrame.HEIGHT, null);//´Ó×ø±ê(0,0)¿ªÊ¼½øĞĞ»æÍ¼			
+					SnakeFrame.WIDTH,  SnakeFrame.HEIGHT, null);//ä»åæ ‡(0,0)å¼€å§‹è¿›è¡Œç»˜å›¾			
 		}		
-		//ÖØĞ´update·½·¨ÊµÏÖË«»º³å£¬½â¾öÉÁË¸ÎÊÌâ
+		//é‡å†™updateæ–¹æ³•å®ç°åŒç¼“å†²ï¼Œè§£å†³é—ªçƒé—®é¢˜
 		public void update(Graphics g){  
 				if(offScreenImage == null)  
-					//ĞÂ½¨Ò»¸öÍ¼Ïñ»º´æ¿Õ¼ä,ÕâÀïÍ¼Ïñ´óĞ¡ÎªWIDTH*HEIGHT 
+					//æ–°å»ºä¸€ä¸ªå›¾åƒç¼“å­˜ç©ºé—´,è¿™é‡Œå›¾åƒå¤§å°ä¸ºWIDTH*HEIGHT 
 		            offScreenImage = this.createImage(WIDTH, HEIGHT);
-					//°ÑËüµÄ»­±ÊÄÃ¹ıÀ´,¸øgImage±£´æ×Å 
+					//æŠŠå®ƒçš„ç”»ç¬”æ‹¿è¿‡æ¥,ç»™gImageä¿å­˜ç€ 
 		            Graphics gImage = offScreenImage.getGraphics();
-		            //½«Òª»­µÄ¶«Î÷»­µ½Í¼Ïñ»º´æ¿Õ¼äÈ¥  
+		            //å°†è¦ç”»çš„ä¸œè¥¿ç”»åˆ°å›¾åƒç¼“å­˜ç©ºé—´å»  
 		            paint(gImage);
-		            //È»ºóÒ»´ÎĞÔÏÔÊ¾³öÀ´
+		            //ç„¶åä¸€æ¬¡æ€§æ˜¾ç¤ºå‡ºæ¥
 		            g.drawImage(offScreenImage, 0, 0, null);           
 		  }
 		public void animation(){
 			try {
-					//¸üĞÂ»­Ãæ
+					//æ›´æ–°ç”»é¢
 					update(getGraphics());
 					Thread.sleep(15);
 			} catch (InterruptedException e) {
